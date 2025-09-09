@@ -1,12 +1,48 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
-export default function FileUpload() {
+// Type definition for the component's props.
+// It receives the currently selected manufacturing service.
+type FileUploadProps = {
+  selectedService: string | null;
+};
+
+// A map defining the supported file types for each manufacturing service.
+const fileTypesByService: { [key: string]: string[] } = {
+  "CNC Machining": [".step", ".stp", ".sldprt", ".x_t", ".ai", ".pdf", ".zip"],
+  "Sheet Metal Fabrication": [".step", ".stp", ".dxf", ".dwg", ".ai", ".pdf", ".zip"],
+  "3D Printing": [".step", ".stp", ".stl", ".3mf", ".ai", ".pdf", ".zip"],
+};
+
+export default function FileUpload({ selectedService }: FileUploadProps) {
+  // State to track if a file is being dragged over the dropzone.
   const [dragActive, setDragActive] = useState(false)
+  // State to store the list of successfully uploaded files.
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+  // State to track if an upload is in progress.
   const [isUploading, setIsUploading] = useState(false)
+  // State to store any file validation errors.
+  const [errors, setErrors] = useState<string[]>([])
+  // Ref to the hidden file input element.
+  const inputRef = useRef<HTMLInputElement>(null)
 
+  /**
+   * Determines the supported file types based on the selected service.
+   * @returns An object with a human-readable text and a string for the input's `accept` attribute.
+   */
+  const getSupportedFileTypes = () => {
+    if (!selectedService) return { text: "Supports all file types", accept: "*" };
+    const types = fileTypesByService[selectedService];
+    if (!types) return { text: "Supports all file types", accept: "*" };
+    return { text: `Supports ${types.join(", ")}`, accept: types.join(",") };
+  };
+
+  const { text: supportedFileTypesText, accept: acceptString } = getSupportedFileTypes();
+
+  /**
+   * Handles drag events on the dropzone.
+   */
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -17,17 +53,44 @@ export default function FileUpload() {
     }
   }
 
+  /**
+   * Processes and validates the files selected by the user.
+   * @param files A FileList object from a drop event or file input.
+   */
   const processFiles = async (files: FileList) => {
-    setIsUploading(true)
-    const fileArray = Array.from(files)
-    
-    // Simulate upload delay
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setUploadedFiles(prev => [...prev, ...fileArray])
-    setIsUploading(false)
+    setErrors([]);
+    const fileArray = Array.from(files);
+    const supportedFileTypes = getSupportedFileTypes().accept.split(',');
+
+    const validFiles: File[] = [];
+    const newErrors: string[] = [];
+
+    // Validate each file based on its extension.
+    for (const file of fileArray) {
+      const fileExtension = `.${file.name.split('.').pop()?.toLowerCase()}`;
+      if (supportedFileTypes.includes('*') || supportedFileTypes.includes(fileExtension)) {
+        validFiles.push(file);
+      } else {
+        newErrors.push(`this file isn't supported: ${fileExtension}`);
+      }
+    }
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+    }
+
+    // "Upload" the valid files.
+    if (validFiles.length > 0) {
+      setIsUploading(true)
+      await new Promise(resolve => setTimeout(resolve, 1500)) // Simulate upload delay
+      setUploadedFiles(prev => [...prev, ...validFiles])
+      setIsUploading(false)
+    }
   }
 
+  /**
+   * Handles the drop event on the dropzone.
+   */
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -37,6 +100,9 @@ export default function FileUpload() {
     }
   }
 
+  /**
+   * Handles the change event for the file input.
+   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     if (e.target.files && e.target.files[0]) {
@@ -44,14 +110,26 @@ export default function FileUpload() {
     }
   }
 
+  /**
+   * Removes a file from the uploaded files list.
+   * @param index The index of the file to remove.
+   */
   const removeFile = (index: number) => {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index))
   }
 
+  /**
+   * Triggers the hidden file input when the dropzone is clicked.
+   */
+  const onBoxClick = () => {
+    inputRef.current?.click();
+  };
+
   return (
     <div className="w-full space-y-6">
+      {/* The main dropzone area */}
       <div
-        className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors ${
+        className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors cursor-pointer ${ 
           dragActive 
             ? 'border-blue-400 bg-blue-50' 
             : 'border-gray-300 bg-white hover:border-gray-400'
@@ -60,6 +138,7 @@ export default function FileUpload() {
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
+        onClick={onBoxClick}
       >
         {isUploading ? (
           <div className="flex flex-col items-center">
@@ -88,33 +167,44 @@ export default function FileUpload() {
             
             <p className="text-lg text-gray-700 mb-2">
               Drop files here or{' '}
-              <label htmlFor="file-upload" className="text-blue-600 hover:underline cursor-pointer">
+              <span className="text-blue-600 hover:underline">
                 Browse
-              </label>{' '}
+              </span>{' '}
               to upload more parts
             </p>
             
             <p className="text-sm text-gray-500 mb-4">
-              Supports .step, .stp, .sldprt, .x_t, .ai, .pdf, .zip
+              {supportedFileTypesText}
             </p>
             
             <p className="text-xs text-gray-400">
               Each upload is recognized as a separate part.
             </p>
+            {/* Display validation errors */}
+            {errors.length > 0 && (
+              <div className="text-red-500 text-sm mt-2">
+                {errors.map((error, i) => (
+                  <p key={i}>{error}</p>
+                ))}
+              </div>
+            )}
           </>
         )}
         
+        {/* Hidden file input, controlled by the dropzone click or browse link */}
         <input
+          ref={inputRef}
           id="file-upload"
           type="file"
           multiple
           onChange={handleChange}
-          accept=".step,.stp,.sldprt,.x_t,.ai,.pdf,.zip"
+          accept={acceptString}
           className="hidden"
           disabled={isUploading}
         />
       </div>
 
+      {/* List of uploaded files */}
       {uploadedFiles.length > 0 && (
         <div className="bg-white rounded-lg border p-4">
           <h3 className="font-semibold text-gray-900 mb-3">Uploaded Files ({uploadedFiles.length})</h3>
