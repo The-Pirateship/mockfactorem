@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FileUpload from '@/components/FileUpload'
 import ManufacturingCards from '@/components/ManufacturingCards'
 import TrustedPartners from '@/components/TrustedPartners'
@@ -10,18 +10,50 @@ export default function Home() {
   // This state is lifted up to the page level to allow communication
   // between ManufacturingCards and FileUpload components.
   const [selectedService, setSelectedService] = useState<string | null>("CNC Machining");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    // Check if user is logged in on component mount
+    const loggedIn = localStorage.getItem('isAuthenticated') === 'true';
+    const email = localStorage.getItem('userEmail') || '';
+    setIsLoggedIn(loggedIn);
+    setUserEmail(email);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userEmail');
+    setIsLoggedIn(false);
+    setUserEmail('');
+    // Optional: redirect to login page after logout
+    // window.location.href = '/login';
+  };
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left Panel: Company branding and key features */}
       <div className="lg:w-1/3 bg-blue-600 text-white p-6 lg:p-8 flex flex-col">
         <div className="mb-8">
-          <a href="https://www.factorem.co/" target="_blank" rel="noopener noreferrer" className="flex items-center mb-4">
-            <div className="w-8 h-8 bg-white text-blue-600 rounded mr-3 flex items-center justify-center font-bold">
-              F
-            </div>
-            <h1 className="text-xl font-semibold">factorem</h1>
-          </a>
+          <div className="flex justify-between items-start">
+            <a href="https://www.factorem.co/" target="_blank" rel="noopener noreferrer" className="flex items-center mb-4">
+              <div className="w-8 h-8 bg-white text-blue-600 rounded mr-3 flex items-center justify-center font-bold">
+                F
+              </div>
+              <h1 className="text-xl font-semibold">factorem</h1>
+            </a>
+            {isLoggedIn && (
+              <div className="text-right">
+                <div className="text-sm text-blue-100">Logged in as {userEmail}</div>
+                <button 
+                  onClick={handleLogout}
+                  className="text-sm text-white hover:underline mt-1"
+                >
+                  Log out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="mb-8">
@@ -91,16 +123,14 @@ export default function Home() {
                 Use sample parts
               </button>
             </a>
-            <p className="text-gray-600 mt-4">
-              Already have an account?{' '}
-              <a href="https://app.factorem.co/login" target="_blank" rel="noopener noreferrer">
-                <button
-                  className="text-blue-600 hover:underline"
-                >
+            {!isLoggedIn && (
+              <p className="text-gray-600 mt-4">
+                Already have an account?{' '}
+                <a href="/login" className="text-blue-600 hover:underline">
                   Log in
-                </button>
-              </a>
-            </p>
+                </a>
+              </p>
+            )}
           </div>
         </div>
       </div>

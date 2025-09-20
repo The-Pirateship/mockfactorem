@@ -42,6 +42,11 @@ bun dev
 
 This will start the development server at `http://localhost:3000`.
 
+Login credentials:
+
+Email: test@email.com
+Password: password
+
 ### Building the Application
 
 To build the application for production, use the following command:
