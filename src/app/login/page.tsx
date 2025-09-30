@@ -15,12 +15,18 @@ export default function LoginPage() {
     setError('');
 
     // Check credentials
-    if (email === 'test@email.com' && password === 'password') {
+    if ((email === 'test@email.com' && password === 'password') || 
+        (email === 'admin@email.com' && password === 'password')) {
       // Store authentication state and user email
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('userEmail', email);
-      // Redirect to home page
-      router.push('/');
+      
+      // Redirect to dashboard if admin, otherwise to home page
+      if (email === 'admin@email.com') {
+        router.push('/dashboard');
+      } else {
+        router.push('/');
+      }
     } else {
       setError('Invalid email or password');
     }
