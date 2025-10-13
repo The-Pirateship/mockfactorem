@@ -17,7 +17,7 @@ The main page of the application is a landing page that introduces Factorem and 
 
 To get a local copy up and running, follow these simple steps.
 
-### Prerequisites
+### Prerequisites 
 
 *   [Bun](https://bun.sh/) (or npm/yarn)
 
