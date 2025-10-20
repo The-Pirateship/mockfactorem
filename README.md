@@ -6,7 +6,7 @@ h
 ## Project Overview ohh
 
 The main page of the application is a landing page that introduces Factorejjjm andjij its services. It allows users to upload their design files, select a manufacturing process, and request a quote.
-
+jjj
 ### Key Features
 
 *   **File Upload:** Users can upload their design hfiles through a drag-and-drop interface or a file browser. The application supports various file types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
