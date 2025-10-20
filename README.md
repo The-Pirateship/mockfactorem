@@ -1,4 +1,4 @@
-# Factorem h
+# Factorem hji
 //
 u
 This is the frontend for the Factorem application, a platform for ordering custom manufactured parts. This application is built with Next.js, React, and TypeScript, and styled with Tailwind CSS.
