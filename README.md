@@ -32,7 +32,7 @@ To get a local copy up and running, follow these simple steps.
     ```sh
     bun install
     ```
-
+KK
 ### Running the Application
 
 To run the application in development mode, use the following command:
