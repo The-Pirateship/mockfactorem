@@ -15,7 +15,7 @@ jjjjj
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with usershh.j
 
 ## Getting Started
-
+jj
 To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
