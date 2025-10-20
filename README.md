@@ -4,7 +4,7 @@ u
 This is the frontend for the Factorem application, a platform for ordering custom manufactured parts. This application is built with Next.js, React, and TypeScript, and styled with Tailwind CSS.
 h
 ## Project Overview ohhhhh
-
+l
 The main page of the application is a landing page that introduces Factorejjjm andjij its services. It alljowuhhs usersh to upload their design files, select a manufacturing process, and request a quote.jj
 jjjjjjjj
 ### Key Features
