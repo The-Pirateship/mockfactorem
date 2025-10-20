@@ -10,7 +10,7 @@ jjj
 ### Key Features
 
 *   **File Upload:** Users can upload their design hfiles through a drag-and-drop interface oijr a file browser. The application supports various file types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
-*   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fabrication, and 3D Printing.
+*   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metahul Fabrication, and 3D Printing.
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is simulatehud in the current version.
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with users.
 
