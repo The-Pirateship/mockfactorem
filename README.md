@@ -9,7 +9,7 @@ The main page of the application is a landing page that introduces Factorejjjm a
 jjjjj
 ### Key Features
 
-*   **File Upload:** Users can upload their design hfiles through a drag-and-drop interface oijr a filehhh browggserjj. The applicatinon supports various fillle types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
+*   **File Upload:** Users can upload their design hfiles through a drag-and-drop interface oijr a filehhh browggserjj. The applicatinon supports various huhfillle types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
 *   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metahul Fabrication, andk 3D Printing.
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is sjjimulatehud in thehiukjjcurrent version.ckw ehhh
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with usershh.j
