@@ -5,7 +5,7 @@ This is the frontend for the Factorem application, a platform for ordering custo
 h
 ## Project Overview ohh
 
-The main page of the application is a landing page that introduces Factorejjjm andjij its services. It allows users to upload their design files, select a manufacturing process, and request a quote.
+The main page of the application is a landing page that introduces Factorejjjm andjij its services. It allows usersh to upload their design files, select a manufacturing process, and request a quote.
 jjj
 ### Key Features
 
