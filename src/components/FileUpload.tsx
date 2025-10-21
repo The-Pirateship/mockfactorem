@@ -1,36 +1,26 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 
-// Type definition for the component's props.
-// It receives the currently selected manufacturing service.
 type FileUploadProps = {
   selectedService: string | null;
+  isLoggedIn: boolean;
 };
 
-// A map defining the supported file types for each manufacturing service.
 const fileTypesByService: { [key: string]: string[] } = {
   "CNC Machining": [".step", ".stp", ".sldprt", ".x_t", ".ai", ".pdf", ".zip"],
   "Sheet Metal Fabrication": [".step", ".stp", ".dxf", ".dwg", ".ai", ".pdf", ".zip"],
   "3D Printing": [".step", ".stp", ".stl", ".3mf", ".ai", ".pdf", ".zip"],
 };
 
-export default function FileUpload({ selectedService }: FileUploadProps) {
-  // State to track if a file is being dragged over the dropzone.
+export default function FileUpload({ selectedService, isLoggedIn }: FileUploadProps) {
   const [dragActive, setDragActive] = useState(false)
-  // State to store the list of successfully uploaded files.
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
-  // State to track if an upload is in progress.
   const [isUploading, setIsUploading] = useState(false)
-  // State to store any file validation errors.
   const [errors, setErrors] = useState<string[]>([])
-  // Ref to the hidden file input element.
   const inputRef = useRef<HTMLInputElement>(null)
 
-  /**
-   * Determines the supported file types based on the selected service.
-   * @returns An object with a human-readable text and a string for the input's `accept` attribute.
-   */
   const getSupportedFileTypes = () => {
     if (!selectedService) return { text: "Supports all file types", accept: "*" };
     const types = fileTypesByService[selectedService];
@@ -40,12 +30,10 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
 
   const { text: supportedFileTypesText, accept: acceptString } = getSupportedFileTypes();
 
-  /**
-   * Handles drag events on the dropzone.
-   */
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    if (!isLoggedIn) return;
     if (e.type === "dragenter" || e.type === "dragover") {
       setDragActive(true)
     } else if (e.type === "dragleave") {
@@ -53,11 +41,8 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
     }
   }
 
-  /**
-   * Processes and validates the files selected by the user.
-   * @param files A FileList object from a drop event or file input.
-   */
   const processFiles = async (files: FileList) => {
+    if (!isLoggedIn) return;
     setErrors([]);
     const fileArray = Array.from(files);
     const supportedFileTypes = getSupportedFileTypes().accept.split(',');
@@ -65,7 +50,6 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
     const validFiles: File[] = [];
     const newErrors: string[] = [];
 
-    // Validate each file based on its extension.
     for (const file of fileArray) {
       const fileExtension = `.${file.name.split('.').pop()?.toLowerCase()}`;
       if (supportedFileTypes.includes('*') || supportedFileTypes.includes(fileExtension)) {
@@ -79,60 +63,50 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
       setErrors(newErrors);
     }
 
-    // "Upload" the valid files.
     if (validFiles.length > 0) {
       setIsUploading(true)
-      await new Promise(resolve => setTimeout(resolve, 1500)) // Simulate upload delay
+      await new Promise(resolve => setTimeout(resolve, 1500))
       setUploadedFiles(prev => [...prev, ...validFiles])
       setIsUploading(false)
     }
   }
 
-  /**
-   * Handles the drop event on the dropzone.
-   */
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    if (!isLoggedIn) return;
     setDragActive(false)
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       processFiles(e.dataTransfer.files)
     }
   }
 
-  /**
-   * Handles the change event for the file input.
-   */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
+    if (!isLoggedIn) return;
     if (e.target.files && e.target.files[0]) {
       processFiles(e.target.files)
     }
   }
 
-  /**
-   * Removes a file from the uploaded files list.
-   * @param index The index of the file to remove.
-   */
   const removeFile = (index: number) => {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index))
   }
 
-  /**
-   * Triggers the hidden file input when the dropzone is clicked.
-   */
   const onBoxClick = () => {
+    if (!isLoggedIn) return;
     inputRef.current?.click();
   };
 
   return (
     <div className="w-full space-y-6">
-      {/* The main dropzone area */}
       <div
-        className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors cursor-pointer ${ 
-          dragActive 
-            ? 'border-blue-400 bg-blue-50' 
-            : 'border-gray-300 bg-white hover:border-gray-400'
+        className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors ${
+          !isLoggedIn 
+            ? 'bg-gray-100 border-gray-200'
+            : dragActive 
+              ? 'border-blue-400 bg-blue-50' 
+              : 'border-gray-300 bg-white hover:border-gray-400 cursor-pointer'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -140,7 +114,16 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
         onDrop={handleDrop}
         onClick={onBoxClick}
       >
-        {isUploading ? (
+        {!isLoggedIn ? (
+          <div className="flex flex-col items-center">
+            <p className="text-lg text-gray-600 mb-4">Please log in to upload files.</p>
+            <Link href="/login">
+              <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                Log In
+              </button>
+            </Link>
+          </div>
+        ) : isUploading ? (
           <div className="flex flex-col items-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
             <p className="text-lg text-gray-700">Uploading files...</p>
@@ -180,7 +163,6 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
             <p className="text-xs text-gray-400">
               Each upload is recognized as a separate part.
             </p>
-            {/* Display validation errors */}
             {errors.length > 0 && (
               <div className="text-red-500 text-sm mt-2">
                 {errors.map((error, i) => (
@@ -191,7 +173,6 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
           </>
         )}
         
-        {/* Hidden file input, controlled by the dropzone click or browse link */}
         <input
           ref={inputRef}
           id="file-upload"
@@ -200,12 +181,11 @@ export default function FileUpload({ selectedService }: FileUploadProps) {
           onChange={handleChange}
           accept={acceptString}
           className="hidden"
-          disabled={isUploading}
+          disabled={isUploading || !isLoggedIn}
         />
       </div>
 
-      {/* List of uploaded files */}
-      {uploadedFiles.length > 0 && (
+      {isLoggedIn && uploadedFiles.length > 0 && (
         <div className="bg-white rounded-lg border p-4">
           <h3 className="font-semibold text-gray-900 mb-3">Uploaded Files ({uploadedFiles.length})</h3>
           <div className="space-y-2">
