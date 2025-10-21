@@ -110,7 +110,7 @@ export default function FileUpload({ selectedService, isLoggedIn }: FileUploadPr
       <div
         className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors ${
           !isLoggedIn 
-            ? 'bg-gray-100 border-gray-200'
+            ? 'bg-gray-200 border-gray-200'
             : dragActive 
               ? 'border-blue-400 bg-blue-50' 
               : 'border-gray-300 bg-white hover:border-gray-400 cursor-pointer'
@@ -123,10 +123,10 @@ export default function FileUpload({ selectedService, isLoggedIn }: FileUploadPr
       >
         {!isLoggedIn ? (
           <div className="flex flex-col items-center">
-            <p className="text-lg text-gray-600 mb-4">Please log in to upload files.</p>
+            <p className="text-lg text-gray-600 mb-4">Please log in to upload your files.</p>
             <Link href="/login">
               <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Log In
+                Login
               </button>
             </Link>
           </div>
