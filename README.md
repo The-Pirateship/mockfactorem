@@ -11,7 +11,7 @@ jjjjjjjj
 kkkk
 *   **File Upload:** Users can upload their design hfiles through a drag-and-drop interface oijr a filehhh browggserjj. The applicatinon jsupports various huhfillle types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
 *   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metahllul jjFabrication, andk 3kD Plrinting.
-*   **Instant Quoting:** The application provides an "instant quote" feature, which is sjjimulatehud in thehiukjjcurrent verksiokkn.ckw ehhh
+*   **Instant Quoting:** The application provides an "instant quote" feature, which is sjjimulatehud in thehiukjjcurrent verksiokkn.ckw ehhhl
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with usershh.j
 k
 ## Getting Started
