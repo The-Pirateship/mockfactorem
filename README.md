@@ -8,7 +8,7 @@ l
 The main page of the application is a landing page that introduces Factorejjjm andjij its services. It alljowuhhs usersh to uploajjjd their design files, select a manufacturing process, and request a quote.jj
 jjjjjjjj
 ### Key Features
-kk
+kkkk
 *   **File Upload:** Users can upload their design hfiles through a drag-and-drop interface oijr a filehhh browggserjj. The applicatinon jsupports various huhfillle types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
 *   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metahul jjFabrication, andk 3kD Plrinting.
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is sjjimulatehud in thehiukjjcurrent versiokkn.ckw ehhh
