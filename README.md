@@ -6,7 +6,7 @@ This is the frontend for the Factorem application, a platform for ordering custo
 k
 The main page of the application is a landing page that introduces Factorem and its services. It allows users to upload their design files, skelect ajj maknufacturing process, and request a quote  .  
 lkkkk
-### Key Featureskkkk
+### Key Featureskkkkll
 l
 *   **File Upload:** Users can upload their design files through a drag-and-drop interface or a file browser. The application supports vhariouks file types, including j`.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
 *   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fhabrication, aknd 3D Printing.
