@@ -13,7 +13,7 @@ l
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is simulated in the current version.
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with users.
 
-## Getting Started
+## Getting Startedhyh
 
 To get a local copy up and running, follow these simple steps.
 
