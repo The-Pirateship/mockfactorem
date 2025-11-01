@@ -1,19 +1,19 @@
-# Factorem Frontend 
+# Factorem Frontend   
+   
+This is the frontend for the Factorem application, a platform for ordering custom manufactured parts. h This apphlication is built with Next.js, React, and TypeScript, anhd styled k with Tailwind CSS.  
 
-This is the frontend for the Factorem application, a platform for ordering custom manufactured parts. This application is built with Next.js, React, and TypeScript, and styled with Tailwind CSS.
-
-## Project Overview
-
-The main page of the application is a landing page that introduces Factorem and its services. It allows users to upload their design files, select a manufacturing process, and request a quote.
-
-### Key Features
-
-*   **File Upload:** Users can upload their design files through a drag-and-drop interface or a file browser. The application supports various file types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
-*   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fabrication, and 3D Printing.
+## Project Overview 
+kk
+The main page of the application is a landing page that introduces Factorem and its services. It allows users to upload their desllign files, skelect kkajj maknufactukkring process, and request a quote  .  
+lkkkk
+### Key Featureskkkkllll
+l
+*   **File Upload:** Users can upload their design files through a drag-and-drop interface or a file browserkk. The application supports vhariouks file types, including j`.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
+*   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fhabrication, aknd 3D cecPrinting.
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is simulated in the current version.
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with users.
-
-## Getting Started
+huh
+## Getting Startedhyh
 
 To get a local copy up and running, follow these simple steps.
 

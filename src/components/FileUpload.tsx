@@ -20,6 +20,8 @@ export default function FileUpload({ selectedService, isLoggedIn }: FileUploadPr
   const [isUploading, setIsUploading] = useState(false)
   const [errors, setErrors] = useState<string[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
+  const MAX_FILE_SIZE_MB = 50
+
 
   const getSupportedFileTypes = () => {
     if (!selectedService) return { text: "Supports all file types", accept: "*" };
@@ -51,6 +53,11 @@ export default function FileUpload({ selectedService, isLoggedIn }: FileUploadPr
     const newErrors: string[] = [];
 
     for (const file of fileArray) {
+      const sizeMB = file.size / (1024 * 1024);
+      if (sizeMB > MAX_FILE_SIZE_MB) {
+        newErrors.push(`${file.name} is too large (${sizeMB.toFixed(1)} MB). Max ${MAX_FILE_SIZE_MB} MB.`);
+        continue;
+      }
       const fileExtension = `.${file.name.split('.').pop()?.toLowerCase()}`;
       if (supportedFileTypes.includes('*') || supportedFileTypes.includes(fileExtension)) {
         validFiles.push(file);
@@ -176,6 +183,7 @@ export default function FileUpload({ selectedService, isLoggedIn }: FileUploadPr
         <input
           ref={inputRef}
           id="file-upload"
+          aria-label="file-input-hidden"
           type="file"
           multiple
           onChange={handleChange}
