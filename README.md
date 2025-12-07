@@ -1,4 +1,4 @@
-# Factorem Frontend 
+# Factorem Frontend  
 
 This is the frontend for the Factorem application, a platform for ordering custom manufactured parts. This application is built with Next.js, React, and TypeScript, and styled with Tailwind CSS.
 
@@ -7,7 +7,7 @@ This is the frontend for the Factorem application, a platform for ordering custo
 The main page of the application is a landing page that introduces Factorem and its services. It allows users to upload their design files, select a manufacturing process, and request a quote.
 
 ### Key Features
-
+ll
 *   **File Upload:** Users can upload their design files through a drag-and-drop interface or a file browser. The application supports various file types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
 *   **Service Selection:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fabrication, and 3D Printing.
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is simulated in the current version.
@@ -16,7 +16,7 @@ The main page of the application is a landing page that introduces Factorem and 
 ## Getting Started
 
 To get a local copy up and running, follow these simple steps.
-
+k
 ### Prerequisites
 
 *   [Bun](https://bun.sh/) (or npm/yarn)
