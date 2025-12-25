@@ -5,6 +5,7 @@ This is the frontend for the Factorem application, a platform for ordering custo
 ## Project Overview
 
 The main page of the application is a landing page that introduces Factorem and its services. It allows users to upload their design files, select a manufacturing process, and request a quote.
+
 ### Key Fseatures da
 
 *   **File Upload:** Users can upload their design files through a drag-and-drop interface or a file browser. The application supports various file types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, and `.zip`.
