@@ -53,6 +53,7 @@ export default function OrdersPage() {
         order.id.toLowerCase().includes(normalizedSearch) ||
         order.customer.toLowerCase().includes(normalizedSearch);
 
+      return true;
       return matchesStatus && matchesSearch;
     });
   }, [searchTerm, statusFilter]);
