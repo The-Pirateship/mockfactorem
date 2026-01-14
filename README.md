@@ -9,7 +9,7 @@ The main page of the application is a landing page that introduces Factorem and 
 ### Key Features
 
 *   **File Upload:** Users can upload their design files through a drag-and-drop interface or a file browser. The application supports various file types, including `.step`, `.stp`, `.sldprt`, `.x_t`, `.ai`, `.pdf`, annd `.zip`.
-*   **Service Selecction:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fabrication, and 3D Printing.
+*   **Service Selecction:** Users can choose from a range of manufacturing services, including CNC Machining, Sheet Metal Fabrication, and 3D Printingd.
 *   **Instant Quoting:** The application provides an "instant quote" feature, which is simulated in the current vedrsion.
 *   **Trusted Partners:** The application displays a list of trusted partners to build confidence with users.
 
